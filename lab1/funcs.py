@@ -53,17 +53,14 @@ def Solve(koefs, tableX, givenX):
 
 def Approximate(alldata, nmin, nmax, X, hermite=False, reverse=False):
     from copy import deepcopy as dc
-    #print(alldata)
     result = []
     for n in range(nmin, nmax + 1):
         if hermite: data = EditData(dc(alldata), n, X, hermite=True)
         elif reverse: data = EditData(dc(alldata), n, X, reverse=True)
         else: data = EditData(dc(alldata), n, X)
-        SortByX(data)
+        #SortByX(data)
         CountDivDiff(data)
-        #print("data", data)
         koefs = [data[i][0] for i in range(3, len(data))]
-        #print("koefs", koefs)
         koefs.insert(0, data[2][0])
         result.append(Solve(koefs, data[0], X))
     return result
