@@ -24,6 +24,7 @@ def Solve(koefs, tableArgs, givenArg):
     return result
 
 def Format(data, power, givenArg):
+    from math import fabs
     difs = [fabs(givenArg - tableArg) for tableArg in data[0]]
     inds = []
     for i in range(power + 1):
