@@ -1,13 +1,16 @@
-from math import *
+#from tabulate import tabulate
 from copy import deepcopy as dc
+from math import *
 from funcs import *
 data = GetData("data.txt")
 X = 0.525
 difs = [fabs(X - x) for x in data[0]]
-results = {}
-results["Newton"] = Approximate(data, 1, 4, X)
-results["Hermite"] = Approximate(data, 1, 4, X, hermite=True)
-results["Reverse"] = Approximate(data, 1, 7, 0, reverse=True)
-print(results["Newton"])
-print(results["Hermite"])
-print(results["Reverse"])
+results = {"Newton": [], "Hermite": [], "Reverse": []}
+for i in range(1, 5):
+	results["Newton"].append(NewtonAlgorithm(dc(data), i, X))
+	results["Hermite"].append(HermiteAlgorithm(dc(data), i, X))
+	results["Reverse"].append(ReverseAlgorithm(dc(data), i))
+#print(tabulate([results["Newton"], results["Hermite"]]))
+#print("Ньютон", results["Newton"])
+#print("Эрмит", results["Hermite"])
+#print("Обратная интерполяция", results["Reverse"])
